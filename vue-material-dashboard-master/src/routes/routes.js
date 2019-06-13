@@ -1,7 +1,7 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
-import Dashboard from "@/pages/Dashboard.vue";
-import UserProfile from "@/pages/UserProfile.vue";
+import Dashboard from "@/pages/Overview.vue";
+import UserProfile from "@/pages/Reporting.vue";
 
 const routes = [
   {

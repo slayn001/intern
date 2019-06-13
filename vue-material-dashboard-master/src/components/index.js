@@ -4,7 +4,7 @@ import NavTabsCard from "./Cards/NavTabsCard.vue";
 import StatsCard from "./Cards/StatsCard.vue";
 
 // Table
-import OrderedTable from "./Tables/OrderedTable.vue";
+import OrderedTable from "./Tables/FrontPageDataTable.vue";
 import NavTabsTable from "./Tables/NavTabsTable";
 
 export {
