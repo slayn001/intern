@@ -21,7 +21,11 @@ public class Met360Controller {
 
         return met360Repository.findAll();
     }
-
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void create(@RequestBody MetLife360Policy metlife360){
+        met360Repository.save(metlife360);
+    }
     @GetMapping("/{mId")
     public MetLife360Policy get(@PathVariable("mId")long mId)
     {
