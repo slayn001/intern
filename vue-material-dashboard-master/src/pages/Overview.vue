@@ -101,6 +101,29 @@
           </template>
         </chart-card>
       </div>
+        <div class="md-layout-item md-medium-size-100 md-size-50">
+            <edit-profile-form data-background-color="green"> </edit-profile-form>
+        </div>
+        <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
+            <chart-card
+                    :chart-data="migrationsbylocale.data"
+                    :chart-options="migrationsbylocale.options"
+                    :chart-responsive-options="migrationsbylocale.responsiveOptions"
+                    :chart-type="'Line'"
+                    data-background-color="dark-blue"
+            >
+                <template slot="content">
+                    <h4 class="title">Migrations by Locale (STATE GOES HERE)</h4>
+                </template>
+
+                <template slot="footer">
+                    <div class="stats">
+                        <md-icon>access_time</md-icon>
+                        updated 10 days ago (THIS DATA IS ALL FAKE)
+                    </div>
+                </template>
+            </chart-card>
+        </div>
       <div
         class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
       >
@@ -149,19 +172,35 @@ import {
   OrderedTable
 } from "@/components";
 
+import { EditProfileForm } from "@/pages";
+
 export default {
   components: {
     StatsCard,
     ChartCard,
     NavTabsCard,
     NavTabsTable,
-    OrderedTable
+    OrderedTable,
+    EditProfileForm
   },
   data() {
     return {
       migrationspermonth: {
         data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+          ],
           series: [[12, 17, 7, 17, 23, 18, 38, 12, 15, 16, 30, 43]]
         },
         options: {
@@ -180,7 +219,20 @@ export default {
       },
       successratepermonth: {
         data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+          ],
           series: [[95, 10, 25, 87, 40, 40, 20, 19, 50, 60, 70, 12]]
         },
         options: {
@@ -188,9 +240,9 @@ export default {
             showGrid: false
           },
           low: 0,
-          high: 101,
+          high: 100,
           chartPadding: {
-            top: 0,
+            top: 20,
             right: 0,
             bottom: 0,
             left: 0
@@ -209,6 +261,25 @@ export default {
             }
           ]
         ]
+      },
+      migrationsbylocale: {
+        data: {
+          labels: ['m', 't', 'w', 't', 'f'],
+          series: [[10,20,10,20,10]]
+        }
+      },
+      options: {
+        lineSmooth: this.$Chartist.Interpolation.cardinal({
+          tension: 0
+        }),
+        low: 0,
+        high: 50,
+        chartPadding: {
+          top: 20,
+          right: 0,
+          bottom: 0,
+          left: 0
+        }
       }
     };
   }

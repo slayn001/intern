@@ -3,7 +3,7 @@
 @import '_colors';
 
 // Typography elements
-$mdb-font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+$mdb-font-family: 'Noto Sans', sans-serif !default;
 $mdb-text-color-light:  $white !default;
 $mdb-text-color-light-hex: $white !default; // for contrast function in inverse
 $mdb-text-color-primary: unquote("rgba(#{$rgb-black}, 0.87)") !default;
@@ -25,10 +25,10 @@ $white-transparent: rgba($white-color, .8);
 
 $gray-color:  #999999 !default;
 
-$brand-primary: $purple !default;
+$brand-primary: $blue !default;
 $brand-success: $green !default;
 $brand-danger: $red !default;
-$brand-warning: $orange !default;
+$brand-warning: $purple !default;
 $brand-info: $cyan !default;
 $brand-rose: $pink !default;
 
@@ -40,7 +40,7 @@ $border-radius-label: 12px !default;
 $border-radius-extreme: 30px !default;
 
 // Typography
-$font-family-sans-serif: 'Roboto', 'Helvetica', 'Arial', sans-serif !default;
+$font-family-sans-serif: 'Noto Sans's, sans-serif !default;
 $font-family-serif: 'Roboto Slab', 'Times New Roman', serif !default;
 
 $headings-font-weight: 300 !default;

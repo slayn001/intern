@@ -1,7 +1,4 @@
-// Cards
-import UserCard from "../pages/UserProfile/UserCard.vue";
-
 // Forms
-import EditProfileForm from "../pages/UserProfile/EditProfileForm.vue";
+import EditProfileForm from "./UserProfile/QueryForm.vue";
 
-export { UserCard, EditProfileForm };
+export { EditProfileForm };
