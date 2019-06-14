@@ -1,13 +1,13 @@
-package com.migrationdashboard.demo;
+package org.raspen.sqlitetest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class SqliteTestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(SqliteTestApplication.class, args);
     }
 
 }
