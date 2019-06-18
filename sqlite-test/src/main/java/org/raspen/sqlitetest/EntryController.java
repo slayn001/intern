@@ -7,6 +7,7 @@ import org.raspen.sqlitetest.service.EntriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,5 +26,16 @@ public class EntryController {
     public String getPolicies() throws JsonProcessingException {
         List<Policy> policies = policiesService.findAllEntries();
         return new ObjectMapper().writeValueAsString(policies);
+    }
+
+    @RequestMapping("/state/{state}")
+    public List<Policy> getPolicyByState(@PathVariable String state) {
+        return policiesService.findByState(state);
+    }
+
+    @RequestMapping("/error/{yesHuh}")
+    public List<Policy> filterLoadedWithError(@PathVariable String yesHuh) {
+        yesHuh.toUpperCase();
+        return policiesService.filterLoadedWithError(yesHuh);
     }
 }
