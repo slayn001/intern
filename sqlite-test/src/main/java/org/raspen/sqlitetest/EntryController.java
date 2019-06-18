@@ -30,12 +30,13 @@ public class EntryController {
 
     @RequestMapping("/state/{state}")
     public List<Policy> getPolicyByState(@PathVariable String state) {
+        state = state.toUpperCase();
         return policiesService.findByState(state);
     }
 
     @RequestMapping("/error/{yesHuh}")
     public List<Policy> filterLoadedWithError(@PathVariable String yesHuh) {
-        yesHuh.toUpperCase();
+        yesHuh = yesHuh.toUpperCase();
         return policiesService.filterLoadedWithError(yesHuh);
     }
 }
