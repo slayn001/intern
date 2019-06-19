@@ -4,6 +4,27 @@
       <div
               class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
       >
+        <stats-card data-background-color="berry">
+          <template slot="header">
+            <md-icon>local_airport</md-icon>
+          </template>
+
+          <template slot="content">
+            <p class="category">Migrations Today</p>
+            <h3 class="title">280</h3>
+          </template>
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>date_range</md-icon>
+              Last 24 Hours (WE NEED FUNCTIONALITY)
+            </div>
+          </template>
+        </stats-card>
+      </div>
+
+      <div
+              class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
+      >
         <stats-card data-background-color="teal">
           <template slot="header">
             <md-icon>done</md-icon>
@@ -13,11 +34,10 @@
             <p class="category">Total Migrations</p>
             <h3 class="title">34,245</h3>
           </template>
-
           <template slot="footer">
             <div class="stats">
               <md-icon>date_range</md-icon>
-              Last 24 Hours (WE NEED FUNCTIONALITY)
+              From 10/12/2019
             </div>
           </template>
         </stats-card>
@@ -113,7 +133,7 @@
                     data-background-color="dark-blue"
             >
                 <template slot="content">
-                    <h4 class="title">Migrations by Locale (STATE GOES HERE)</h4>
+                    <h4 class="title">Query Data (Query from left form will populate here)</h4>
                 </template>
 
                 <template slot="footer">
