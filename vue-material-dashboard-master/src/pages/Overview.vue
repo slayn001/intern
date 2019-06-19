@@ -126,9 +126,9 @@
         </div>
         <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
             <chart-card
-                    :chart-data="migrationsbylocale.data"
-                    :chart-options="migrationsbylocale.options"
-                    :chart-responsive-options="migrationsbylocale.responsiveOptions"
+                    :chart-data="queryData.data"
+                    :chart-options="queryData.options"
+                    :chart-responsive-options="queryData.responsiveOptions"
                     :chart-type="'Line'"
                     data-background-color="dark-blue"
             >
@@ -157,27 +157,25 @@
           </md-card-content>
         </md-card>
       </div>
-      <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50"
-      >
-        <nav-tabs-card>
+      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
+        <chart-card
+                :chart-data="migrationsPerLocale.data"
+                :chart-options="migrationsPerLocale.options"
+                :chart-responsive-options="migrationsPerLocale.responsiveOptions"
+                :chart-type="'Line'"
+                data-background-color="dark-blue"
+        >
           <template slot="content">
-            <span class="md-nav-tabs-title">Tasks:</span>
-            <md-tabs md-sync-route class="md-success" md-alignment="left">
-              <md-tab id="tab-home" md-label="Bugs" md-icon="bug_report">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-
-              <md-tab id="tab-pages" md-label="Website" md-icon="code">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-
-              <md-tab id="tab-posts" md-label="server" md-icon="cloud">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-            </md-tabs>
+            <h4 class="title">Query Data (Query from left form will populate here)</h4>
           </template>
-        </nav-tabs-card>
+
+          <template slot="footer">
+            <div class="stats">
+              <md-icon>access_time</md-icon>
+              updated 10 days ago (THIS DATA IS ALL FAKE)
+            </div>
+          </template>
+        </chart-card>
       </div>
     </div>
   </div>
@@ -187,8 +185,6 @@
 import {
   StatsCard,
   ChartCard,
-  NavTabsCard,
-  NavTabsTable,
   OrderedTable
 } from "@/components";
 
@@ -198,8 +194,6 @@ export default {
   components: {
     StatsCard,
     ChartCard,
-    NavTabsCard,
-    NavTabsTable,
     OrderedTable,
     EditProfileForm
   },
@@ -282,10 +276,10 @@ export default {
           ]
         ]
       },
-      migrationsbylocale: {
+      queryData: {
         data: {
-          labels: ['m', 't', 'w', 't', 'f'],
-          series: [[10,20,10,20,10]]
+          labels: [],
+          series: [[]]
         }
       },
       options: {
@@ -299,6 +293,12 @@ export default {
           right: 0,
           bottom: 0,
           left: 0
+        }
+      },
+      migrationsPerLocale: {
+        data: {
+          labels: ['m', 't', 'w', 't', 'f'],
+          series: [[10,20,10,20,10]]
         }
       }
     };
