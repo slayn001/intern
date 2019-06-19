@@ -26,4 +26,28 @@ public class EntryController {
         List<Policy> policies = policiesService.findAllEntries();
         return new ObjectMapper().writeValueAsString(policies);
     }
+
+    @RequestMapping("/state/{state}")
+    public List<Policy> getPolicyByState(@PathVariable String state) {
+       String s =  state.toUpperCase();
+        return policiesService.findByState(s);
+    }
+
+    @RequestMapping("/error/{yesHuh}")
+    public List<Policy> filterLoadedWithError(@PathVariable String yesHuh) {
+        yesHuh = yesHuh.toUpperCase();
+        return policiesService.filterLoadedWithError(yesHuh);
+    }
+
+    @RequestMapping("/companies/{company}")
+    public List<Policy> getWritingCompany(@PathVariable String company) {
+        return policiesService.filterWritingCompany(company);
+    }
+
+    @RequestMapping("/businesses/{business}")
+    public List<Policy> getLineOfBusiness(@PathVariable String business) {
+        return policiesService.filterLineOfBusiness(business);
+    }
+
+
 }
