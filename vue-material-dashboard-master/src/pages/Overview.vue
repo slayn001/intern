@@ -166,7 +166,7 @@
                 data-background-color="dark-blue"
         >
           <template slot="content">
-            <h4 class="title">Query Data (Query from left form will populate here)</h4>
+            <h4 class="title">Migrations per locale</h4>
           </template>
 
           <template slot="footer">
@@ -297,7 +297,7 @@ export default {
       },
       migrationsPerLocale: {
         data: {
-          labels: ['m', 't', 'w', 't', 'f'],
+          labels: ['az', 'co', 'ct', 'in', 'nj'],
           series: [[10,20,10,20,10]]
         }
       }
