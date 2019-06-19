@@ -10,3 +10,5 @@ buildNumber.properties
 vue-material-dashboard-master/.idea
 /.idea/
 /node_modules/
+policies.db
+package-lock.json
