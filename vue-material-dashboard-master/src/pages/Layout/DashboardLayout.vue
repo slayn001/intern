@@ -5,12 +5,16 @@
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/overview">
-        <md-icon>store</md-icon>
-        <p>Overview</p>
+        <md-icon>assessment</md-icon>
+        <p>Charts</p>
       </sidebar-link>
       <sidebar-link to="/reporting">
-        <md-icon>subject</md-icon>
-        <p>Reporting</p>
+        <md-icon>description</md-icon>
+        <p>Reports</p>
+      </sidebar-link>
+      <sidebar-link to="/testingpage">
+        <md-icon>error</md-icon>
+        <p>Testing</p>
       </sidebar-link>
     </side-bar>
 

@@ -27,7 +27,7 @@
           </div>
           <md-list>
             <md-list-item href="#/">
-              <i class="material-icons">store</i>
+              <i class="material-icons">home</i>
               <p class="hidden-lg hidden-md">Overview</p>
             </md-list-item>
 
@@ -35,7 +35,7 @@
               <drop-down>
                 <a slot="title" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="material-icons">notifications</i>
-                  <span class="notification">5</span>
+
                   <p class="hidden-lg hidden-md">Notifications</p>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
