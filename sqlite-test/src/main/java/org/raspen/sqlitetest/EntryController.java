@@ -39,4 +39,16 @@ public class EntryController {
         yesHuh = yesHuh.toUpperCase();
         return policiesService.filterLoadedWithError(yesHuh);
     }
+
+    @RequestMapping("/companies/{company}")
+    public List<Policy> getWritingCompany(@PathVariable String company) {
+        return policiesService.filterWritingCompany(company);
+    }
+
+    @RequestMapping("/businesses/{business}")
+    public List<Policy> getLineOfBusiness(@PathVariable String business) {
+        return policiesService.filterLineOfBusiness(business);
+    }
+
+
 }

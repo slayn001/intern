@@ -13,6 +13,10 @@ public class EntriesService {
     private PolicyRepository policyRepository;
 
     public List<Policy> findAllEntries() { return policyRepository.findAllEntries(); }
-    public List<Policy> findByState(String state) { return policyRepository.findByState(state);}
+    public List<Policy> findByState(String s) { return policyRepository.findByState(s);}
     public List<Policy> filterLoadedWithError(String yesHuh) { return policyRepository.filterLoadedWithError(yesHuh);}
+    public List<Policy> filterWritingCompany(String a) {return policyRepository.filterWritingCompany(a);}
+    public List<Policy> filterLineOfBusiness(String a) {return policyRepository.filterLineOfBusiness(a);}
+
+
 }

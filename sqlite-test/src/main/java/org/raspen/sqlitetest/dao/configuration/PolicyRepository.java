@@ -18,5 +18,10 @@ public interface PolicyRepository extends CrudRepository<org.raspen.sqlitetest.m
     @Query("from Policy where policyLoadedWithError = ?1")
     List<Policy> filterLoadedWithError(String yesHuh);
 
+    @Query("from Policy where writingCompany = ?1")
+    List<Policy> filterWritingCompany(String a);
+
+    @Query("from Policy where lineOfBusiness  = ?1")
+    List<Policy> filterLineOfBusiness(String b);
 
 }

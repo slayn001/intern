@@ -152,9 +152,7 @@ public class Policy {
 
     public void setLineOfBusiness(String LineOfBusiness) { this.lineOfBusiness = LineOfBusiness; }
 
-    public String getState() { return state; }
 
-    public void setState(String lState) { this.state = lState; }
 
     public Date getPolicyEffectiveDate() { return policyEffectiveDate; }
 
@@ -259,6 +257,10 @@ public class Policy {
     public String getTransformationErrorDescription() { return transformationErrorDescription; }
 
     public void setTransformationErrorDescription(String transformationErrorDescription) { this.transformationErrorDescription = transformationErrorDescription; }
+
+    public String getState() { return state; }
+
+    public void setState(String state) { this.state = state; }
 
     public Integer getId() { return id; }
 
