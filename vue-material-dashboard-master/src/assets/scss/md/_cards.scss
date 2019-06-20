@@ -232,7 +232,7 @@
 
     [data-background-color="dark-blue"],
     .md-tabs.md-info .md-tabs-navigation{
-        background: linear-gradient(60deg, $indigo, $indigo);
+        background: linear-gradient(60deg, $metBlue, $metBlue);
         @include shadow-big-color($brand-info);
     }
 
@@ -244,7 +244,7 @@
 
     [data-background-color="green"],
     .md-tabs.md-success .md-tabs-navigation{
-        background: linear-gradient(60deg, $green-500, $green-500);
+        background: linear-gradient(60deg, $metGreen, $metGreen);
         @include shadow-big-color($brand-success);
     }
 
@@ -265,6 +265,42 @@
         background: linear-gradient(60deg, $red-400, $red-600);
         @include shadow-big-color($brand-danger);
     }
+    [data-background-color="metBlue"] {
+        background: $metBlue a {
+            color: $metBlue;
+        }
+    }
+    [data-background-color="metBlue2"] {
+        background: $metBlue2 a {
+            color: $metBlue2;
+        }
+    }
+    [data-background-color="metDarkBlue"] {
+         background: $metDarkBlue a {
+             color: $metDarkBlue;
+         }
+     }
+    [data-background-color="metGreen"] {
+        background: $metGreen a {
+            color: $metGreen;
+        }
+    }
+    [data-background-color="metBerry"] {
+        background: $metBerry a {
+            color: $metBerry;
+        }
+    }
+    [data-background-color="metPurple"] {
+        background: $metPurple a {
+            color: $metPurple;
+        }
+    }
+    [data-background-color="metYellow"] {
+        background: $metYellow a {
+            color: $metYellow;
+        }
+    }
+
 
     [data-background-color]{
         color: $white-color;

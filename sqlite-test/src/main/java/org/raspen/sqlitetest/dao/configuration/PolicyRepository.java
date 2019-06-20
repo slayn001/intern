@@ -21,7 +21,6 @@ public interface PolicyRepository extends CrudRepository<org.raspen.sqlitetest.m
     @Query("from Policy where writingCompany = ?1")
     List<Policy> filterWritingCompany(String a);
 
-
     @Query("from Policy where lineOfBusiness  = ?1")
     List<Policy> filterLineOfBusiness(String b);
 
