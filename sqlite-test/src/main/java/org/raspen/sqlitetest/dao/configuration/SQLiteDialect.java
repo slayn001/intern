@@ -17,6 +17,7 @@ public class SQLiteDialect extends Dialect {
         registerColumnType(Types.INTEGER, "integer");
         registerColumnType(Types.BIGINT, "bigint");
         registerColumnType(Types.FLOAT, "float");
+        registerColumnType(Types.VARCHAR, "state");
         registerColumnType(Types.REAL, "real");
         registerColumnType(Types.DOUBLE, "double");
         registerColumnType(Types.NUMERIC, "numeric");
