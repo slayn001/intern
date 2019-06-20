@@ -3,6 +3,7 @@ package org.raspen.sqlitetest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.raspen.sqlitetest.model.Policy;
+import org.raspen.sqlitetest.model.EtlReport;
 import org.raspen.sqlitetest.service.EntriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -49,5 +50,9 @@ public class EntryController {
         return policiesService.filterLineOfBusiness(business);
     }
 
+    @RequestMapping("/reports/errorreport")
+    public List<EtlReport> getEtlReportReport() {
+        return policiesService.filterEtlReport();
+    }
 
 }
