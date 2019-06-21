@@ -1,0 +1,28 @@
+<head>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <script>
+        let loadDoc = ()=> {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:3000/record/2',
+                data: {
+                },
+                success: (result) => {
+                    console.log(result);
+                },
+                error: (result) => {
+                    console.error(result);
+                }
+            })
+        }
+    </script>
+    <div>
+        <button id='btn1' onclick='loadDoc()'>Click me</button>
+    </div>
+</body>
