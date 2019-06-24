@@ -8,7 +8,7 @@ exports.test = (req, res) => {
 
 exports.all = (req, res, next) => {
     Record.find({}, (err, recordList) => {
-        if(err) return next(err)
+        if(err) return next(err) 
         res.send(recordList)
     })
 }
