@@ -5,7 +5,10 @@ const Schema = mongoose.Schema
 
 let RecordSchema = new Schema({
     policyNumber: String,
-    policyNumberSuffix: String
+    state: Schema.Types.Mixed,
+    writingCompany: String,
+    lineOfBusiness: String,
+    Date: Date
 })
 
 module.exports = mongoose.model('Record', RecordSchema)

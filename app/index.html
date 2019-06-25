@@ -15,8 +15,7 @@
             <mb-chart></mb-chart> 
             <mc-chart></mc-chart>
         </div>
-        
-        
+                
         <script type="text/x-template" id="mbc-template">
             <div id="mbc_div">
                 <GChart
@@ -40,7 +39,6 @@
             </div>
         </script>
         <script>
-            
             let mCChart = {
                 template: "#mcc-template",
                 data() {
@@ -54,7 +52,7 @@
                          this.chartsLib = google
                          
                          $.ajax({
-                            url: "http://localhost:3000/materialChart/mcchart",
+                            url: "http://localhost:3000/materialChart/mcchart?st=AZ&st=CO&st=CT&st=IL&st=IN&st=NJ&st=OH&st=PA&st=TX&st=WI",
                             dataType: "json",
                             async: false
                             })
@@ -66,7 +64,7 @@
                              data.addColumn('number', 'Pelp');
                              
                              resp.forEach((el) => {
-                                 data.addRow([el.state, el.Auto, el.Home, el.Pelp])
+                                 data.addRow([el.state, el.auto, el.home, el.pelp])
                              });
                              
                              this.chartData = data;

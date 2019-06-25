@@ -1,5 +1,7 @@
 "use strict"
 
+const Record = require ('../models/record.model')
+
 exports.mbchart = (req, res) => {
     res.send([
         ['State', 'Auto', 'Home', 'Pep'],
@@ -12,44 +14,22 @@ exports.mbchart = (req, res) => {
 }
 
 exports.mcchart = (req, res) => {
-    res.send([
-                {
-                    "state": "PA",
-                    "Auto": 15,
-                    "Home": 14,
-                    "Pelp": 12
-                },
-                {
-                    "state": "IL",
-                    "Auto": 13,
-                    "Home": 15,
-                    "Pelp": 21
-                },
-                {
-                    "state": "WA",
-                    "Auto": 7,
-                    "Home": 6,
-                    "Pelp": 4
-                },
-                {
-                    "state": "AZ",
-                    "Auto": 12,
-                    "Home": 9,
-                    "Pelp": 20
-                },
-                {
-                    "state": "KY",
-                    "Auto": 19,
-                    "Home": 12,
-                    "Pelp": 13
-                },
-                {
-                    "state": "IN",
-                    "Auto": 17,
-                    "Home": 11,
-                    "Pelp": 9
-                },
+    
+    let ret = []
+    
+    Record.find({'state.code': {$in: req.query.st}}, (err, recordList) => {
+        if(err) return next(err)
         
+        const result = (arr, stateCode, lob) => {
+            return arr.filter( (elem) => {
+                return elem.state.code === stateCode && elem.lineOfBusiness === lob
+            }).length
+        }
+         
+        req.query.st.forEach( (el) => {
+            ret.push({state:el, auto:result(recordList, el, 'auto'), home: result(recordList, el, 'home'), pelp:result(recordList, el, 'pelp')})
+        })
         
-        ])
+        res.send(ret)
+    })
 }
