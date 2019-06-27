@@ -5,8 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue-google-charts@0.3.2/dist/vue-google-charts.browser.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue-tables-2@1.4.70/dist/vue-tables-2.min.js"></script>
+<!--        <script src="https://cdn.jsdelivr.net/npm/vue-client-table@0.4.1/dist/vue-client-table.min.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!--        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     </head>
 
     <body>
@@ -14,6 +18,7 @@
         <div id="app">
             <mb-chart></mb-chart> 
             <mc-chart></mc-chart>
+            <t-table></t-table>
         </div>
                 
         <script type="text/x-template" id="mbc-template">
@@ -36,6 +41,14 @@
                     :data="chartData"
                     @ready="onChartReady"
                 />
+            </div>
+        </script>
+        <script type="text/x-template" id="t-template">
+            <div id='t_div'>
+                <v-client-table
+                    :columns="columns"
+                    :data="rows"
+                    :options="options"></v-client-table>
             </div>
         </script>
         <script>
@@ -109,11 +122,110 @@
                 }
             }
             
+            let tTable = {
+                
+                
+                template:"#t-template",
+                data(){
+                    return {
+                        columns:['company', 'polExtract', 'errExtract', 'polTrans','errTrans','polLoaded','errLoaded','polIssued','manMigrate','polCancel','polNewPlat','pctMigrate','pctError','legTotal'],
+                        rows: [
+                            {
+                                company:'Company',
+                                polExtract:'Policies Extracted',
+                                errExtract:'Extract Errors',
+                                polTrans:'Policies Transformed',
+                                errTrans:'Transform Errors',
+                                polLoaded:'Policies Loaded',
+                                errLoaded:'Load Errors',
+                                polIssued:'Policies Issued',
+                                manMigrate:'Policies Manually Migrated',
+                                polCancel: 'Policies Cancelled',
+                                polNewPlat:'Policies on 360',
+                                pctMigrate:'Pct Migrated',
+                                pctError: 'Pct Errored',
+                                legTotal: 'Legacy Total'}, 
+                            {
+                                company:'Company',
+                                polExtract:'Policies Extracted',
+                                errExtract:'Extract Errors',
+                                polTrans:'Policies Transformed',
+                                errTrans:'Transform Errors',
+                                polLoaded:'Policies Loaded',
+                                errLoaded:'Load Errors',
+                                polIssued:'Policies Issued',
+                                manMigrate:'Policies Manually Migrated',
+                                polCancel: 'Policies Cancelled',
+                                polNewPlat:'Policies on 360',
+                                pctMigrate:'Pct Migrated',
+                                pctError: 'Pct Errored',
+                                legTotal: 'Legacy Total'},
+                            {   
+                                company:'Company',
+                                polExtract:'Policies Extracted',
+                                errExtract:'Extract Errors',
+                                polTrans:'Policies Transformed',
+                                errTrans:'Transform Errors',
+                                polLoaded:'Policies Loaded',
+                                errLoaded:'Load Errors',
+                                polIssued:'Policies Issued',
+                                manMigrate:'Policies Manually Migrated',
+                                polCancel: 'Policies Cancelled',
+                                polNewPlat:'Policies on 360',
+                                pctMigrate:'Pct Migrated',
+                                pctError: 'Pct Errored',
+                                legTotal: 'Legacy Total'}, 
+                            {
+                                company:'Company',
+                                polExtract:'Policies Extracted',
+                                errExtract:'Extract Errors',
+                                polTrans:'Policies Transformed',
+                                errTrans:'Transform Errors',
+                                polLoaded:'Policies Loaded',
+                                errLoaded:'Load Errors',
+                                polIssued:'Policies Issued',
+                                manMigrate:'Policies Manually Migrated',
+                                polCancel: 'Policies Cancelled',
+                                polNewPlat:'Policies on 360',
+                                pctMigrate:'Pct Migrated',
+                                pctError: 'Pct Errored',
+                                legTotal: 'Legacy Total'}],
+                        options: {
+                            headings:{
+                                company:'Company',
+                                polExtract:'Policies Extracted',
+                                errExtract:'Extract Errors',
+                                polTrans:'Policies Transformed',
+                                errTrans:'Transform Errors',
+                                polLoaded:'Policies Loaded',
+                                errLoaded:'Load Errors',
+                                polIssued:'Policies Issued',
+                                manMigrate:'Policies Manually Migrated',
+                                polCancel: 'Policies Cancelled',
+                                polNewPlat:'Policies on 360',
+                                pctMigrate:'Pct Migrated',
+                                pctError: 'Pct Errored',
+                                legTotal: 'Legacy Total'
+                        },
+                        sortable: ['company', 'pctError'],
+                        filterable: ['company', 'pctError']
+                        }
+                    }
+                }    
+            }
+            
+            Vue.use(VueTables.ClientTable);
+            
             new Vue({
               el: "#app",
               components: { 'mc-chart': mCChart,
-                            'mb-chart': mBChart }
+                            'mb-chart': mBChart,
+                            't-table': tTable
+                          }
             });
+            
+            
+            
         </script>
     </body>
 </html>
