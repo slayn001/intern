@@ -55,8 +55,8 @@ let populateDb = () => {
         return writingCompanies[Math.floor(Math.random() * 10)]
     }
     
-    const getExtractedDate = () => {
-        return new Date()
+    const getExtractedDate = (start, end) => {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     }
     
     const getError = () => {
@@ -71,7 +71,7 @@ let populateDb = () => {
             policyNumber: getPolicyNumber(),
             writingCompany: getWritingCompany(),
             error: getError(),
-            extractedDate: getExtractedDate()
+            extractedDate: getExtractedDate(new Date(2012, 0, 1), new Date())
         }
 
         db.collection('records').insertOne(doc);
