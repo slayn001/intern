@@ -8,7 +8,8 @@ let RecordSchema = new Schema({
     state: Schema.Types.Mixed,
     writingCompany: String,
     lineOfBusiness: String,
-    Date: Date
+    error: Boolean,
+    date: Date
 })
 
 module.exports = mongoose.model('Record', RecordSchema)

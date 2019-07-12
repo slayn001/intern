@@ -6,21 +6,21 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue-google-charts@0.3.2/dist/vue-google-charts.browser.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/vue-tables-2@1.4.70/dist/vue-tables-2.min.js"></script>
-<!--        <script src="https://cdn.jsdelivr.net/npm/vue-client-table@0.4.1/dist/vue-client-table.min.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<!--        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://unpkg.com/vuex"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
 
     <body>
         
         <div id="app">
+            <st-drop></st-drop>
             <mb-chart></mb-chart> 
             <mc-chart></mc-chart>
             <t-table></t-table>
         </div>
-                
+               
         <script type="text/x-template" id="mbc-template">
             <div id="mbc_div">
                 <GChart
@@ -51,57 +51,60 @@
                     :options="options"></v-client-table>
             </div>
         </script>
+        <script type="text/x-template" id="dr-template">
+            <div class="dropdown">
+                <div class="selected" @click="toggle">{{selected}}</div>
+                <div class="options" v-show="isOpen">
+                    <div class="option" v-for="option in options" @click="set(option)">
+                        {{ option }}
+                    </div>
+                </div>
+            </div>           
+        </script>
         <script>
+                   
+        
+            const urls = {
+                mcurl : 'http://localhost:3000/materialChart/mcchart?',
+                mburl : 'http://localhost:3000/materialChart/mbchart?'
+            }
+            
+            const chartData = {
+                mcChartData: 'mcChartData',
+                mbChartData: 'mbChartData',
+                mdChartData: 'mdChartData'
+            }
+            
             let mCChart = {
                 template: "#mcc-template",
                 data() {
                     return {
-                        chartData: {},
                         chartOptions: {}
+                    }
+                },
+                computed: {
+                    chartData () {
+                        return this.$store.getters.getMcData
                     }
                 },
                 methods: {
                      onChartReady (chart, google) {
-                         this.chartsLib = google
-                         
-                         $.ajax({
-                            url: "http://localhost:3000/materialChart/mcchart?st=AZ&st=CO&st=CT&st=IL&st=IN&st=NJ&st=OH&st=PA&st=TX&st=WI",
-                            dataType: "json",
-                            async: false
-                            })
-                         .done((resp) => {
-                             let data = new google.visualization.DataTable();
-                             data.addColumn('string', 'State');
-                             data.addColumn('number', 'Auto');
-                             data.addColumn('number', 'Home')
-                             data.addColumn('number', 'Pelp');
-                             
-                             resp.forEach((el) => {
-                                 data.addRow([el.state, el.auto, el.home, el.pelp])
-                             });
-                             
-                             this.chartData = data;
-                         })
-                         .fail((xhr) => {
-                             console.log(xhr);
-                         })
+                         this.$store.dispatch("populate", {wave: "WAVE1", query:'', charts:[{url:urls.mcurl, chartData: chartData.mcChartData}]})
                     }   
                 }
             }
             
             let mBChart = {
                 template: "#mbc-template",
-                data: function() {
+                data() {
                     return {
-                        chartsLib: null,
-                        chartData: JSON.parse($.ajax({
-                            url: "http://localhost:3000/materialChart/mbchart",
-                            dataType: "json",
-                            async: false
-                            }).responseText)
+                       chartOptions:{}
                     }
                 },
                 computed:{
+                    chartData () {
+                        return this.$store.getters.getMbData
+                    },
                     chartOptions () {
                       if (!this.chartsLib) return null
                       return this.chartsLib.charts.Bar.convertOptions({
@@ -116,8 +119,8 @@
                     }
                 },
                 methods: {
-                     onChartReady (chart, google) {
-                      this.chartsLib = google
+                    onChartReady (chart, google) {
+                        this.$store.dispatch("populate", {wave: "WAVE1", query:'', charts:[{url:urls.mburl, chartData: chartData.mbChartData}]})
                     }
                 }
             }
@@ -143,10 +146,10 @@
                                 polCancel: 'Policies Cancelled',
                                 polNewPlat:'Policies on 360',
                                 pctMigrate:'Pct Migrated',
-                                pctError: 'Pct Errored',
+                                pctError: '10',
                                 legTotal: 'Legacy Total'}, 
                             {
-                                company:'Company',
+                                company:'BOB',
                                 polExtract:'Policies Extracted',
                                 errExtract:'Extract Errors',
                                 polTrans:'Policies Transformed',
@@ -161,7 +164,7 @@
                                 pctError: 'Pct Errored',
                                 legTotal: 'Legacy Total'},
                             {   
-                                company:'Company',
+                                company:'ADAM',
                                 polExtract:'Policies Extracted',
                                 errExtract:'Extract Errors',
                                 polTrans:'Policies Transformed',
@@ -188,7 +191,7 @@
                                 polCancel: 'Policies Cancelled',
                                 polNewPlat:'Policies on 360',
                                 pctMigrate:'Pct Migrated',
-                                pctError: 'Pct Errored',
+                                pctError: '90',
                                 legTotal: 'Legacy Total'}],
                         options: {
                             headings:{
@@ -206,26 +209,132 @@
                                 pctMigrate:'Pct Migrated',
                                 pctError: 'Pct Errored',
                                 legTotal: 'Legacy Total'
-                        },
-                        sortable: ['company', 'pctError'],
-                        filterable: ['company', 'pctError']
+                            },
+                            sortable: ['company', 'pctError'],
+                            filterable: ['company', 'pctError']
                         }
                     }
                 }    
             }
             
+            let stDrop = {
+                
+                template:"#dr-template",
+                data: function() {
+                  return {
+                    
+                    isOpen: false,
+                    selected: 'Choose your Wave',
+                    options: [
+                        'WAVE1',
+                        'WAVE2',
+                        'WAVE3'
+                    ]
+                  }
+                },
+                methods: {
+                    toggle: function() {
+                      this.isOpen = !this.isOpen;
+                    },
+                    show: function() {
+                      this.isOpen = true;
+                    },
+                    hide: function() {
+                      this.isOpen = false;
+                    },
+                    // Set option as    selected state and close dropdown.
+                    set: function(option) {
+                      
+                      this.$store.dispatch("populate", {wave: option, query:'', charts:[{url:urls.mcurl, chartData: chartData.mcChartData}, 
+                                                                                        {url:urls.mburl, chartData: chartData.mbChartData},
+                                                                                        {url:urls.mburl, chartData: chartData.mdChartData}]})
+                      this.selected = option;
+                      this.hide();
+                  }
+                }
+            }
+            
+            //this.$store.dispatch("populate", {wave: "WAVE1", url: mcurl, chartData:'mcChartData', query:''})
+            
+            const store = new Vuex.Store({
+                
+                state: {
+                    mcChartData: {},
+                    mbChartData: {},
+                    mdChartData: {}
+                },
+                mutations: {
+                    POP_CHART(state, payload) {
+                        this.chartsLib = google
+                        
+                        payload.charts.forEach( el => { 
+                            $.ajax({
+                                url: `${el.url}${payload.query}`,
+                                dataType: "json",
+                                async: false
+                                })
+                             .done((resp) => {
+                                 let data = new google.visualization.DataTable();
+                                 data.addColumn('string', 'State');
+                                 data.addColumn('number', 'Auto');
+                                 data.addColumn('number', 'Home')
+                                 data.addColumn('number', 'Pelp');
+
+                                 resp.forEach((el) => {
+                                     data.addRow([el.state, el.auto, el.home, el.pelp])
+                                 });
+
+                                 state[el.chartData] = data;
+                                console.log(state)
+                             })
+                             .fail((xhr) => {
+                                 console.log(xhr);
+                             })
+                        })
+                    }
+                },
+                actions: {
+                    populate(context, payload) {
+                        
+                        const waveArray = [
+                            {"WAVE1": ['AZ', 'CO', 'CT', 'IL', 'IN', 'NJ', 'OH', 'PA', 'TX', 'WI']},
+                            {"WAVE2": ['AK','AL','DC','GA','HI','IA','ID','LA','ME','MO','MS','MT','NE','NH','NM','NV','OK','RI','SD','TN','VT','WV','WY']},
+                            {"WAVE3": ['AR','CA','DE','FL','KS','KY','MA','MD','MI','MN','ND','NC','NY','OR','SC','UT','VA','WA']}
+                        ];
+                        
+                        
+                        waveArray.forEach( el => {
+                            if (payload.wave === Object.keys(el)[0])
+                                el[payload.wave].forEach( el => {
+                                    payload.query = payload.query +`st=${el}&`
+                                })
+                        })
+                        
+                        context.commit("POP_CHART", payload)
+                    }
+                },
+                getters: {
+                    getMcData(state) {
+                        return state.mcChartData
+                    },
+                    getMbData(state) {
+                        return state.mbChartData
+                    }
+                }
+            })
+            
             Vue.use(VueTables.ClientTable);
             
             new Vue({
               el: "#app",
+              store,
               components: { 'mc-chart': mCChart,
                             'mb-chart': mBChart,
-                            't-table': tTable
+                            't-table': tTable,
+                            'st-drop': stDrop
                           }
             });
-            
-            
-            
+                        
         </script>
     </body>
 </html>
